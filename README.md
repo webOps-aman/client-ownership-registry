@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Client Ownership Registry (frontend demo)
 
 Company: **Emperium** (change it with `NEXT_PUBLIC_COMPANY_NAME` in `.env.local`).
@@ -196,3 +197,6 @@ the browser. Admin *Settings* already has a "Coming soon" card as the placeholde
 - Data is per browser; there is no sync between devices.
 - Roles are enforced in the UI and service layer, but a technical user can edit localStorage. A backend fixes this.
 - No Manager / Team Lead role and no ownership-expiry enforcement in this phase.
+=======
+# client-ownership-registry
+>>>>>>> 80d4b9d8767744ac22373f44bd496c361a50a6c2
