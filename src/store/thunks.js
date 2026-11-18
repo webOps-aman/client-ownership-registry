@@ -19,14 +19,21 @@ import { setDisputes } from "./slices/disputesSlice";
 
 /** Loads everything the current user may see from the services into Redux. */
 export const hydrateStore = createAsyncThunk("app/hydrate", async (_, { dispatch }) => {
-  await seedService.ensureSeeded();
-  const user = await authService.restore();
-  dispatch(setUser(user));
-  dispatch(setUsers(await userService.list(user)));
-  dispatch(setClients(await clientService.list(user)));
-  dispatch(setLogs(await logService.list(user)));
-  dispatch(setDisputes(await disputeService.list(user)));
-  dispatch(setHydrated());
+  try {
+    await seedService.ensureSeeded();
+    const user = await authService.restore();
+    dispatch(setUser(user));
+    dispatch(setUsers(await userService.list(user)));
+    dispatch(setClients(await clientService.list(user)));
+    dispatch(setLogs(await logService.list(user)));
+    dispatch(setDisputes(await disputeService.list(user)));
+  } catch (error) {
+    // A storage/bootstrap error should not leave every route stuck on its loading skeleton.
+    console.error("App hydration failed", error);
+    dispatch(setUser(null));
+  } finally {
+    dispatch(setHydrated());
+  }
 });
 
 /** Builds a thunk: fn(arg, currentUser) -> result. Errors become plain objects; success refreshes the store. */
