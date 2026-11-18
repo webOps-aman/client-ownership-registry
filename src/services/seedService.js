@@ -21,7 +21,9 @@ function seed() {
 export const seedService = {
   /** Runs once: only seeds if nothing has been stored yet. */
   async ensureSeeded() {
-    if (!storage.get(K.meta)?.seeded) seed();
+    const users = storage.get(K.users, []);
+    // Recover browsers that were first opened on a deployment with missing demo env vars.
+    if (!storage.get(K.meta)?.seeded || !Array.isArray(users) || users.length === 0) seed();
   },
   /** Wipes all app data, reseeds, keeps the admin logged in. */
   async reset(admin) {

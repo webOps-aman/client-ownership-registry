@@ -18,13 +18,12 @@ const e = {
 
 // Hardcoded demo users (seeded into the store on first load).
 const demoUsers = [
-  { name: "Admin", role: "admin", creds: e.ADMIN },
-  { name: "Company Agent", role: "agent", creds: e.AGENT },
-  { name: "Broker One", role: "broker", creds: e.B1 },
-  { name: "Broker Two", role: "broker", creds: e.B2 },
-  { name: "Broker Three", role: "broker", creds: e.B3 },
+  { name: "Admin", role: "admin", creds: [e.ADMIN[0] || "admin", e.ADMIN[1] || "admin123"] },
+  { name: "Company Agent", role: "agent", creds: [e.AGENT[0] || "agent1", e.AGENT[1] || "agent123"] },
+  { name: "Broker One", role: "broker", creds: [e.B1[0] || "broker1", e.B1[1] || "broker123"] },
+  { name: "Broker Two", role: "broker", creds: [e.B2[0] || "broker2", e.B2[1] || "broker123"] },
+  { name: "Broker Three", role: "broker", creds: [e.B3[0] || "broker3", e.B3[1] || "broker123"] },
 ]
-  .filter((u) => u.creds[0] && u.creds[1])
   .map(({ creds, ...u }) => ({ ...u, loginId: creds[0], password: creds[1] }));
 
 export const ENV = {
