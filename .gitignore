@@ -42,6 +42,8 @@ coverage/
 
 *.log
 logs/
+!src/components/admin/logs/
+!src/components/admin/logs/**
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
